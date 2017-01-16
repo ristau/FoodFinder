@@ -8,8 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		3884480DEE3A5AC1B1C12684 /* Pods_FoodFinder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1843968B60CBC336E2FCE6F /* Pods_FoodFinder.framework */; };
+		E522FAE41E2D39D1009B68EA /* BusinessCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E522FAE31E2D39D1009B68EA /* BusinessCell.swift */; };
+		E522FAE81E2D3C43009B68EA /* FoodBusinessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E522FAE71E2D3C43009B68EA /* FoodBusinessViewController.swift */; };
+		E522FAEA1E2D3D51009B68EA /* Business.swift in Sources */ = {isa = PBXBuildFile; fileRef = E522FAE91E2D3D51009B68EA /* Business.swift */; };
+		E522FAEC1E2D586A009B68EA /* YelpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E522FAEB1E2D586A009B68EA /* YelpClient.swift */; };
 		E53CDA401E2C71EA008AC35A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53CDA3F1E2C71EA008AC35A /* AppDelegate.swift */; };
-		E53CDA421E2C71EA008AC35A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53CDA411E2C71EA008AC35A /* ViewController.swift */; };
 		E53CDA451E2C71EA008AC35A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E53CDA431E2C71EA008AC35A /* Main.storyboard */; };
 		E53CDA471E2C71EA008AC35A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E53CDA461E2C71EA008AC35A /* Assets.xcassets */; };
 		E53CDA4A1E2C71EA008AC35A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E53CDA481E2C71EA008AC35A /* LaunchScreen.storyboard */; };
@@ -19,9 +22,12 @@
 		469FDD29912A7F362BE45433 /* Pods-FoodFinder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodFinder.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FoodFinder/Pods-FoodFinder.debug.xcconfig"; sourceTree = "<group>"; };
 		8062861D9EDC2331019CD503 /* Pods-FoodFinder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodFinder.release.xcconfig"; path = "Pods/Target Support Files/Pods-FoodFinder/Pods-FoodFinder.release.xcconfig"; sourceTree = "<group>"; };
 		A1843968B60CBC336E2FCE6F /* Pods_FoodFinder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FoodFinder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E522FAE31E2D39D1009B68EA /* BusinessCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusinessCell.swift; sourceTree = "<group>"; };
+		E522FAE71E2D3C43009B68EA /* FoodBusinessViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodBusinessViewController.swift; sourceTree = "<group>"; };
+		E522FAE91E2D3D51009B68EA /* Business.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Business.swift; sourceTree = "<group>"; };
+		E522FAEB1E2D586A009B68EA /* YelpClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YelpClient.swift; sourceTree = "<group>"; };
 		E53CDA3C1E2C71EA008AC35A /* FoodFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E53CDA3F1E2C71EA008AC35A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E53CDA411E2C71EA008AC35A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		E53CDA441E2C71EA008AC35A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E53CDA461E2C71EA008AC35A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E53CDA491E2C71EA008AC35A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -57,6 +63,31 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		E522FAE01E2D361F009B68EA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E522FAE91E2D3D51009B68EA /* Business.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		E522FAE11E2D3628009B68EA /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				E522FAE31E2D39D1009B68EA /* BusinessCell.swift */,
+				E522FAE71E2D3C43009B68EA /* FoodBusinessViewController.swift */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+		E522FAE21E2D3645009B68EA /* API */ = {
+			isa = PBXGroup;
+			children = (
+				E522FAEB1E2D586A009B68EA /* YelpClient.swift */,
+			);
+			name = API;
+			sourceTree = "<group>";
+		};
 		E53CDA331E2C71EA008AC35A = {
 			isa = PBXGroup;
 			children = (
@@ -78,8 +109,10 @@
 		E53CDA3E1E2C71EA008AC35A /* FoodFinder */ = {
 			isa = PBXGroup;
 			children = (
+				E522FAE21E2D3645009B68EA /* API */,
+				E522FAE11E2D3628009B68EA /* UI */,
+				E522FAE01E2D361F009B68EA /* Models */,
 				E53CDA3F1E2C71EA008AC35A /* AppDelegate.swift */,
-				E53CDA411E2C71EA008AC35A /* ViewController.swift */,
 				E53CDA431E2C71EA008AC35A /* Main.storyboard */,
 				E53CDA461E2C71EA008AC35A /* Assets.xcassets */,
 				E53CDA481E2C71EA008AC35A /* LaunchScreen.storyboard */,
@@ -211,8 +244,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E53CDA421E2C71EA008AC35A /* ViewController.swift in Sources */,
+				E522FAEC1E2D586A009B68EA /* YelpClient.swift in Sources */,
 				E53CDA401E2C71EA008AC35A /* AppDelegate.swift in Sources */,
+				E522FAEA1E2D3D51009B68EA /* Business.swift in Sources */,
+				E522FAE81E2D3C43009B68EA /* FoodBusinessViewController.swift in Sources */,
+				E522FAE41E2D39D1009B68EA /* BusinessCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -374,6 +410,7 @@
 				E53CDA501E2C71EA008AC35A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
