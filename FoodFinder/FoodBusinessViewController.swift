@@ -188,15 +188,22 @@ class FoodBusinessViewController: UIViewController, UITableViewDataSource, UITab
     }
   }
   
-  
-    /*
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+
+      print("preparing for segue")
+      
+      if segue.identifier == "TableView" {
+
+        let cell = sender as! UITableViewCell
+        let indexPath = tableView.indexPath(for: cell)
+        business = businesses![(indexPath?.row)!]
+      }
+      
+      let detailvc = segue.destination as! DetailViewController
+      detailvc.business = business
+
     }
-    */
 
 }
