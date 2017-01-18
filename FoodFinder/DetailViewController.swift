@@ -24,27 +24,95 @@ class DetailViewController: UIViewController {
   @IBOutlet weak var reviewCountLabel: UILabel!
   @IBOutlet weak var categoriesLabel: UILabel!
   @IBOutlet weak var mapView: MKMapView!
-  
-  
+  @IBOutlet weak var openNowLabel: UILabel!
+  @IBOutlet weak var backgroundImageView: UIImageView!
   
     override func viewDidLoad() {
         super.viewDidLoad()
-
-      navigationItem.title = business.name
-    //  nameLabel.text = business.name
-      businessImage.setImageWith(business.imageURL!)
-      ratingImage.setImageWith(business.ratingImageURL!)
-      addressLabel.text = business.address
-      phoneLabel.text = business.phone
-      distanceLabel.text = business.distance
-      reviewCountLabel.text = ("\(business.reviewCount!) Reviews")
-      categoriesLabel.text = business.categories
+    
+      loadLabels()
+      styleBusinessImage()
+      styleBackgroundImage()
       
-  }
+      let centerLocation = CLLocation(latitude: business.latitude!, longitude: business.longitude!)
+      goToLocation(location: centerLocation)
+      addAnnotationAtCoordinate(coordinate: business.coordinate!)
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+}
+  
+  func loadLabels() {
+    
+    nameLabel.text = business.name
+    businessImage.setImageWith(business.imageURL!)
+    backgroundImageView.setImageWith(business.imageURL!)
+    ratingImage.setImageWith(business.ratingImageURL!)
+    addressLabel.text = business.address
+    phoneLabel.text = business.phone
+    distanceLabel.text = business.distance
+    reviewCountLabel.text = ("\(business.reviewCount!) Reviews")
+    categoriesLabel.text = business.categories
+    openNow()
+    
+    
+  }
+  
+  func openNow() {
+    
+    if business.openNow {
+      openNowLabel.text = "Open Now"
+      openNowLabel.textColor = UIColor.green
+    } else {
+      openNowLabel.text = "Closed"
+      openNowLabel.textColor = UIColor.red
     }
     
+    
+  }
+  
+
+  //MARK: - Styling Methods
+  
+  func styleBusinessImage() {
+    
+    // Style the business profile image
+    businessImage.layer.cornerRadius = self.businessImage.frame.size.width/2
+    businessImage.clipsToBounds = true
+    businessImage.layer.borderWidth = 2.0
+    businessImage.layer.borderColor = UIColor.white.cgColor
+
+  }
+  
+  func styleBackgroundImage() {
+    
+    // Add blur effect to background image
+    let blur = UIBlurEffect(style: UIBlurEffectStyle.light)
+    let blurEffectView = UIVisualEffectView(effect: blur)
+    blurEffectView.frame = backgroundImageView.bounds
+    blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+    backgroundImageView.addSubview(blurEffectView)
+
+  }
+  
+  // MARK: - MapKit Methods
+  
+  func goToLocation(location: CLLocation) {
+    
+    let span = MKCoordinateSpanMake(0.005, 0.005)
+    let region = MKCoordinateRegionMake(location.coordinate, span)
+    mapView.setRegion(region, animated: false)
+    
+  }
+  
+  func addAnnotationAtCoordinate(coordinate: CLLocationCoordinate2D) {
+    let annotation = MKPointAnnotation()
+    annotation.coordinate = coordinate
+    annotation.title = business.name
+    mapView.addAnnotation(annotation)
+  }
+  
+  
+  
+  
+
+  
 }

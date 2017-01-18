@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import MapKit
 
 class Business: NSObject {
   
@@ -22,10 +23,12 @@ class Business: NSObject {
   var categories: String?
   var rating: NSNumber?
   var reviewCount: NSNumber?
+  var openNow: Bool = false
   
   var coordinates: NSDictionary?
-  var latitude: CGFloat?
-  var longitude: CGFloat?
+  var coordinate: CLLocationCoordinate2D?
+  var latitude: Double?
+  var longitude: Double?
   
   init(dictionary: NSDictionary) {
     
@@ -58,8 +61,9 @@ class Business: NSObject {
       
       coordinates = location!["coordinate"] as? NSDictionary
       if coordinates != nil {
-        latitude = coordinates!["latitude"] as! CGFloat
-        longitude = coordinates!["longitude"] as! CGFloat
+        latitude = coordinates!["latitude"] as! Double
+        longitude = coordinates!["longitude"] as! Double
+        coordinate = CLLocationCoordinate2D(latitude: latitude!, longitude: longitude!)
       }
       
       }
@@ -93,6 +97,7 @@ class Business: NSObject {
     }
     
     
+    openNow = dictionary["is_closed"] as! Bool
     rating = dictionary["rating"] as? NSNumber
     reviewCount = dictionary["review_count"] as? NSNumber
     

@@ -125,17 +125,7 @@ class FoodBusinessViewController: UIViewController, UITableViewDataSource, UITab
     return cell
   }
   
-  // MARK: - MapKit Methods
-  
-  func goToLocation(location: CLLocation) {
-    
-    let span = MKCoordinateSpanMake(0.1, 0.1)
-    let region = MKCoordinateRegionMake(location.coordinate, span)
-    mapView.setRegion(region, animated: false)
-    
-  }
-  
-  
+
   
   
   
@@ -190,6 +180,17 @@ class FoodBusinessViewController: UIViewController, UITableViewDataSource, UITab
       }
     }
   }
+  
+  // MARK: - MapKit Methods
+  
+  func goToLocation(location: CLLocation) {
+    
+    let span = MKCoordinateSpanMake(0.1, 0.1)
+    let region = MKCoordinateRegionMake(location.coordinate, span)
+    mapView.setRegion(region, animated: false)
+    
+  }
+  
   
     // MARK: - Navigation
 
