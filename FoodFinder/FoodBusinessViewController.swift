@@ -70,9 +70,12 @@ class FoodBusinessViewController: UIViewController, UITableViewDataSource, UITab
       if let businesses = businesses {
         for business in businesses {
           print("Name: \(business.name!)")
-          print("Address: \(business.address!)")
+          print("Address: \(business.address)")
+          print("Phone: \(business.phone!)")
           print("Categories: \(business.categories!)")
-          print("Coordinates: \(business.coordinates!)")
+          print("Latitude: \(business.latitude!)")
+          print("Longitude: \(business.longitude!)")
+          
         }
       }
     }
@@ -94,7 +97,7 @@ class FoodBusinessViewController: UIViewController, UITableViewDataSource, UITab
       if let businesses = businesses {
         for business in businesses {
           print("Name: \(business.name!)")
-          print("Address: \(business.address!)")
+          print("Address: \(business.address)")
           print("Categories: \(business.categories!)")
         }
       }

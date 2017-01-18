@@ -12,13 +12,15 @@ import UIKit
 class Business: NSObject {
   
   var name: String?
-  var address: String?
+  var address: String = ""
+  var phone: String?
 
   var imageURL: URL?
   var ratingImageURL: URL?
 
   var distance: String?
   var categories: String?
+  var rating: NSNumber?
   var reviewCount: NSNumber?
   
   var coordinates: NSDictionary?
@@ -36,8 +38,10 @@ class Business: NSObject {
       imageURL = nil
     }
     
+    phone = dictionary["display_phone"] as? String
+    
+    
     let location = dictionary["location"] as? NSDictionary
-    var address = ""
     if location != nil {
       let addressArray = location!["address"] as? NSArray
       if addressArray != nil && addressArray!.count > 0 {
@@ -54,14 +58,12 @@ class Business: NSObject {
       
       coordinates = location!["coordinate"] as? NSDictionary
       if coordinates != nil {
-        
+        latitude = coordinates!["latitude"] as! CGFloat
+        longitude = coordinates!["longitude"] as! CGFloat
       }
       
       }
-  
-    // get coordinates here
-    
-    self.address = address
+
 
     let categoriesArray = dictionary["categories"] as? [[String]]
     if categoriesArray != nil {
@@ -90,6 +92,8 @@ class Business: NSObject {
       ratingImageURL = nil
     }
     
+    
+    rating = dictionary["rating"] as? NSNumber
     reviewCount = dictionary["review_count"] as? NSNumber
     
   }
