@@ -96,7 +96,8 @@ class FoodBusinessViewController: UIViewController, UITableViewDataSource, UITab
           print("Address: \(business.address)")
           print("Phone: \(business.phone!)")
           print("Categories: \(business.categories!)")
-          print("Coordinate: \(business.coordinate!)")
+         // print("Coordinate: \(business.coordinate!)")
+          print("Open Now: \(business.openNow)")
           
         }
       }
