@@ -23,7 +23,7 @@ class Business: NSObject {
   var categories: String?
   var rating: NSNumber?
   var reviewCount: NSNumber?
-  var openNow: Bool = false
+  var openNow: Bool = true 
   
   var coordinates: NSDictionary?
   var coordinate: CLLocationCoordinate2D?
@@ -61,8 +61,8 @@ class Business: NSObject {
       
       coordinates = location!["coordinate"] as? NSDictionary
       if coordinates != nil {
-        latitude = coordinates!["latitude"] as! Double
-        longitude = coordinates!["longitude"] as! Double
+        latitude = coordinates!["latitude"] as? Double
+        longitude = coordinates!["longitude"] as? Double
         coordinate = CLLocationCoordinate2D(latitude: latitude!, longitude: longitude!)
       }
       

@@ -107,6 +107,7 @@ class DetailViewController: UIViewController {
     let annotation = MKPointAnnotation()
     annotation.coordinate = coordinate
     annotation.title = business.name
+    annotation.subtitle = business.address
     mapView.addAnnotation(annotation)
   }
   

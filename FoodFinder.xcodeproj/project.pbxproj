@@ -18,6 +18,7 @@
 		E53CDA451E2C71EA008AC35A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E53CDA431E2C71EA008AC35A /* Main.storyboard */; };
 		E53CDA471E2C71EA008AC35A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E53CDA461E2C71EA008AC35A /* Assets.xcassets */; };
 		E53CDA4A1E2C71EA008AC35A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E53CDA481E2C71EA008AC35A /* LaunchScreen.storyboard */; };
+		E59DEFCC1E30053B00AB1D45 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59DEFCB1E30053B00AB1D45 /* FilterViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		E53CDA461E2C71EA008AC35A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E53CDA491E2C71EA008AC35A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E53CDA4B1E2C71EA008AC35A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E59DEFCB1E30053B00AB1D45 /* FilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				E522FAEF1E2DC405009B68EA /* DetailViewController.swift */,
+				E59DEFCB1E30053B00AB1D45 /* FilterViewController.swift */,
 				E522FAE31E2D39D1009B68EA /* BusinessCell.swift */,
 				E522FAE71E2D3C43009B68EA /* FoodBusinessViewController.swift */,
 				E522FAED1E2DA2FE009B68EA /* InfiniteScrollActivityView.swift */,
@@ -253,6 +256,7 @@
 			files = (
 				E522FAEE1E2DA2FE009B68EA /* InfiniteScrollActivityView.swift in Sources */,
 				E522FAEC1E2D586A009B68EA /* YelpClient.swift in Sources */,
+				E59DEFCC1E30053B00AB1D45 /* FilterViewController.swift in Sources */,
 				E53CDA401E2C71EA008AC35A /* AppDelegate.swift in Sources */,
 				E522FAEA1E2D3D51009B68EA /* Business.swift in Sources */,
 				E522FAE81E2D3C43009B68EA /* FoodBusinessViewController.swift in Sources */,
