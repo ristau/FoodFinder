@@ -23,7 +23,7 @@ class Business: NSObject {
   var categories: String?
   var rating: NSNumber?
   var reviewCount: NSNumber?
-  var openNow: Bool = true 
+  var openNow: Bool = true  // need to remove openNow, as this refers to whether the business is permanently closed 
   
   var coordinates: NSDictionary?
   var coordinate: CLLocationCoordinate2D?
@@ -42,6 +42,9 @@ class Business: NSObject {
     }
     
     phone = dictionary["display_phone"] as? String
+    if phone == nil {
+      phone = ""
+    }
     
     
     let location = dictionary["location"] as? NSDictionary

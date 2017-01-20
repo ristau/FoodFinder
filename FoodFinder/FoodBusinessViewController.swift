@@ -19,6 +19,9 @@ class FoodBusinessViewController: UIViewController, UITableViewDataSource, UITab
   var business: Business?
   
   var searchTerm: String?
+  var annotations: [MKPointAnnotation] = []
+ 
+
   
   // ScrollView & Activity Indicator
   var isMoreDataLoading = false
@@ -49,20 +52,17 @@ class FoodBusinessViewController: UIViewController, UITableViewDataSource, UITab
         self.navigationItem.titleView = searchBar
         searchBar.sizeToFit()
         searchBar.delegate = self
-        searchTerm = "Greek"
+        searchTerm = "Pizza"
       
         // Set up map view 
+        mapView.delegate = self
+        mapView.isHidden = true 
         locationManager = CLLocationManager()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         locationManager.distanceFilter = 200
         locationManager.requestWhenInUseAuthorization()
-      
-      
-        mapView.delegate = self
-        let centerLocation = CLLocation(latitude: 37.7833, longitude: -122.4167)
-        goToLocation(location: centerLocation)
-      
+     
         // Set up Infinite Scroll loading indicator
         let frame = CGRect(x:0, y: tableView.contentSize.height, width:tableView.bounds.size.width, height: InfiniteScrollActivityView.defaultHeight)
         loadingMoreView = InfiniteScrollActivityView(frame: frame)
@@ -72,11 +72,14 @@ class FoodBusinessViewController: UIViewController, UITableViewDataSource, UITab
         var insets = tableView.contentInset
         insets.bottom += InfiniteScrollActivityView.defaultHeight
         tableView.contentInset = insets
-      
-      
-        // get Data from Network
-        fetchDataFromNetwork()
 
+  }
+  
+
+  override func viewWillAppear(_ animated: Bool) {
+    
+    fetchDataFromNetwork()
+    print("calling viewWillAppear")
   }
 
   
@@ -96,21 +99,22 @@ class FoodBusinessViewController: UIViewController, UITableViewDataSource, UITab
           print("Address: \(business.address)")
           print("Phone: \(business.phone!)")
           print("Categories: \(business.categories!)")
-         // print("Coordinate: \(business.coordinate!)")
-          print("Open Now: \(business.openNow)")
           
         }
       }
+      
       self.tableView.reloadData()
-
-    }
+      self.setDataForMap()
+      self.reloadMap()
+      
+      }
     )
     
   }
   
   func fetchMoreData() {
     
-    Business.searchWithTerm(term: "Thai", completion: { (businesses: [Business]?, error: Error?) -> Void in
+    Business.searchWithTerm(term: searchTerm!, completion: { (businesses: [Business]?, error: Error?) -> Void in
       
       self.businesses = businesses
       self.filteredBusinesses = businesses
@@ -118,6 +122,7 @@ class FoodBusinessViewController: UIViewController, UITableViewDataSource, UITab
       self.isMoreDataLoading = false // update the flag
       self.loadingMoreView!.stopAnimating() // stop the loading indicator
       self.tableView.reloadData() // reload tableview
+      self.mapView.reloadInputViews()
       
       if let businesses = businesses {
         for business in businesses {
@@ -155,15 +160,16 @@ class FoodBusinessViewController: UIViewController, UITableViewDataSource, UITab
   @IBAction func filter(_ sender: Any) {
     
     print("pressed filter") 
-    
-    
-    
-  }
-  
-  
-  
 
+  }
+ 
+  @IBAction func didSelectCategory(_ segue: UIStoryboardSegue) {
+    
+    let controller = segue.source as! FilterViewController
+    searchTerm = controller.selectedCategoryName
+    print("Search Term is now: \(searchTerm!)")
   
+  }
   
   
   // MARK: - Search Bar
@@ -228,6 +234,11 @@ class FoodBusinessViewController: UIViewController, UITableViewDataSource, UITab
   
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
     if let location = locations.first {
+      print("Location is the following: \(location.coordinate)")
+      
+      YelpClient.latitude = location.coordinate.latitude
+      YelpClient.longitude = location.coordinate.longitude
+      
       let span = MKCoordinateSpanMake(0.05, 0.05)
       let region = MKCoordinateRegionMake(location.coordinate, span)
       mapView.setRegion(region, animated: false )
@@ -237,12 +248,26 @@ class FoodBusinessViewController: UIViewController, UITableViewDataSource, UITab
   
   func setDataForMap() {
     
+    removeAnnotations()
+    
     if let businesses = businesses {
       for business in businesses {
         self.addAnnotationAtCoordinate(coordinate: business.coordinate!, name: business.name!, address: business.address)
       }
     }
+    
+    print("Number of annotations are: \(annotations.count)")
+    print("Annotations are: \(annotations)")
+
   }
+  
+  func reloadMap(){
+    
+    mapView.setRegion(mapView.region, animated: true)
+ 
+  }
+  
+  
   
   
   func goToLocation(location: CLLocation) {
@@ -254,12 +279,20 @@ class FoodBusinessViewController: UIViewController, UITableViewDataSource, UITab
   }
   
   func addAnnotationAtCoordinate(coordinate: CLLocationCoordinate2D, name: String, address: String) {
-
     let annotation = MKPointAnnotation()
     annotation.coordinate = coordinate
     annotation.title = name
     annotation.subtitle = address
     mapView.addAnnotation(annotation)
+    annotations.append(annotation)
+  }
+  
+  
+  func removeAnnotations() {
+  
+    mapView.removeAnnotations(annotations)
+    annotations.removeAll()
+    
   }
   
   
@@ -295,7 +328,7 @@ class FoodBusinessViewController: UIViewController, UITableViewDataSource, UITab
   @IBAction func toggleView(_ sender: UIBarButtonItem) {
     
     if currentView == self.tableView {
-      
+
       setDataForMap()
       loadMapView()
       
@@ -316,6 +349,7 @@ class FoodBusinessViewController: UIViewController, UITableViewDataSource, UITab
     navigationItem.titleView?.isHidden = true
     
     UIView.transition(from: self.tableView, to: self.mapView, duration: 0, options: .showHideTransitionViews, completion: nil)
+    tableView.isHidden = true
     currentView = self.mapView
     
   }
@@ -326,6 +360,7 @@ class FoodBusinessViewController: UIViewController, UITableViewDataSource, UITab
     navigationItem.titleView?.isHidden = false
     
     UIView.transition(from: self.mapView, to: self.tableView, duration: 0, options: .showHideTransitionViews, completion: nil)
+    mapView.isHidden = true
     currentView = self.tableView
     
   }
@@ -358,6 +393,7 @@ class FoodBusinessViewController: UIViewController, UITableViewDataSource, UITab
       } else if segue.identifier == "Filter" {
         
         let filtervc = segue.destination as! FilterViewController
+        filtervc.selectedCategoryName = searchTerm
         
         
       }

@@ -8,28 +8,95 @@
 
 import UIKit
 
-class FilterViewController: UIViewController {
+class FilterViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+  
+  @IBOutlet weak var tableView: UITableView!
+  
+    var selectedCategoryName: String!
+  
+    var categories = [
+    "No Category",
+    "American",
+    "French",
+    "Greek",
+    "German",
+    "Indian",
+    "Italian",
+    "Mexican",
+    "Peruvian",
+    "Pizza",
+    "Portugese",
+    "Thai",
+    ]
 
+    var selectedIndexPath = IndexPath()
+  
     override func viewDidLoad() {
         super.viewDidLoad()
+      
+      tableView.dataSource = self
+      tableView.delegate = self
+      
+      navigationItem.title = "Select Category"
+      
+      for i in 0..<categories.count {
+        
+        if categories[i] == selectedCategoryName {
+          selectedIndexPath = IndexPath(row: i, section: 0)
+          break
+        }
+      }
+      
+     print("Selected Category: \(selectedCategoryName!)")
 
-        // Do any additional setup after loading the view.
-    }
+   }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+
+  //MARK: - TableView Methods
+  
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+  
+    return categories.count
+  }
+  
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
     
-
-    /*
+    let categoryName = categories[indexPath.row]
+    cell.textLabel!.text = categoryName
+    print(categoryName)
+    
+    if categoryName == selectedCategoryName {
+      cell.accessoryType = .checkmark
+    } else {
+      cell.accessoryType = .none
+    }
+    return cell
+  }
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    if indexPath.row != selectedIndexPath.row {
+      if let newCell = tableView.cellForRow(at: indexPath) {
+        newCell.accessoryType = .checkmark
+      }
+      if let oldCell = tableView.cellForRow(at: selectedIndexPath) {
+        oldCell.accessoryType = .none
+      }
+      selectedIndexPath = indexPath
+    }
+  }
+  
+  
+  
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+      if segue.identifier == "SelectedCategory" {
+        let cell = sender as! UITableViewCell
+        if let indexPath = tableView.indexPath(for: cell){
+          selectedCategoryName = categories[indexPath.row]
+        }
+      }
+      
     }
-    */
-
-}
+  }

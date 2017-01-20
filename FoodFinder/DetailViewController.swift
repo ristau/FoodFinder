@@ -58,6 +58,12 @@ class DetailViewController: UIViewController {
   
   func openNow() {
     
+    // Background Note:  This field from the Yelp API actually refers to whether the business is permanently closed
+    // (and not whether it is open now at this time)
+    // Field is included for display purposes only and set to true as a default
+
+    business.openNow = true // default setting for display 
+    
     if business.openNow {
       openNowLabel.text = "Open Now"
       openNowLabel.textColor = UIColor.green

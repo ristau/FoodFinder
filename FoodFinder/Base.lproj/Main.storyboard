@@ -172,20 +172,40 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Filter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y86-4E-22T">
-                                <rect key="frame" x="116" y="123" width="39" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fJy-1l-3pi">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="Cell" editingAccessoryType="checkmark" id="BH1-cQ-uSC">
+                                        <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BH1-cQ-uSC" id="ZfO-fn-zb3">
+                                            <rect key="frame" x="0.0" y="0.0" width="281" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="4pd-fC-bF5" kind="unwind" identifier="SelectedCategory" unwindAction="didSelectCategory:" id="zkm-th-eJk"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="fJy-1l-3pi" firstAttribute="leading" secondItem="pYe-EO-3Xj" secondAttribute="leading" id="T1L-yF-aUe"/>
+                            <constraint firstItem="5Tn-ZL-lCK" firstAttribute="top" secondItem="fJy-1l-3pi" secondAttribute="bottom" id="j3l-LD-Xgc"/>
+                            <constraint firstAttribute="trailing" secondItem="fJy-1l-3pi" secondAttribute="trailing" id="jRf-lR-dJL"/>
+                            <constraint firstItem="fJy-1l-3pi" firstAttribute="top" secondItem="pYe-EO-3Xj" secondAttribute="top" id="zqk-Ud-cdP"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="fJy-1l-3pi" id="OLt-jG-ZNe"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aRR-q1-nCJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="4pd-fC-bF5" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="624" y="892"/>
+            <point key="canvasLocation" x="1311" y="945"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="5KI-de-hkk">

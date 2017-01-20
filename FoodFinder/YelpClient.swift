@@ -25,6 +25,9 @@ class YelpClient: BDBOAuth1RequestOperationManager {
   var accessToken: String!
   var accessSecret: String!
   
+  static var latitude: Double = 37.746790
+  static var longitude: Double = -122.4245
+  
   // MARK: Shared Instance 
   
   static let sharedInstance = YelpClient(consumerKey: yelpConsumerKey, consumerSecret: yelpConsumerSecret, accessToken: yelpToken, accessSecret: yelpTokenSecret)
@@ -58,12 +61,17 @@ class YelpClient: BDBOAuth1RequestOperationManager {
     let limit: Int = 10
     let page: Int = 2
     let offset: Int = limit * page
+    let locString = String(YelpClient.latitude) + ", " + String(YelpClient.longitude)
    
     // For additional parameters, see http://www.yelp.com/developers/documentation/v2/search_api
     
     // Default the location to San Francisco
     
-    var parameters: [String : AnyObject] = ["term": term as AnyObject, "ll": "37.785771, -122.406165" as AnyObject, "limit" : limit as AnyObject, "offset": offset as AnyObject]
+   // var parameters: [String : AnyObject] = ["term": term as AnyObject, "ll": "37.785771, -122.406165" as AnyObject, "limit" : limit as AnyObject, "offset": offset as AnyObject]
+    
+    
+    var parameters: [String : AnyObject] = ["term": term as AnyObject, "ll": locString as AnyObject, "limit" : limit as AnyObject, "offset": offset as AnyObject]
+    
     
     if sort != nil {
       parameters["sort"] = sort!.rawValue as AnyObject?
