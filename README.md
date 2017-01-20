@@ -2,7 +2,7 @@
 
 **FoodFinder** is a Yelp search app using the Yelp API(http://www.yelp.com/developers/documentation/v2/search_api).
 
-Time spent: **17** hours spent in total
+Time spent: **20** hours spent in total
 
 ## User Stories
 
@@ -14,8 +14,8 @@ The following **required** functionality is completed:
 
 The following **optional** features are implemented:
 
-- [ ] Search results page
-   - [ ] Infinite scroll for restaurant results.
+- [X] Search results page
+   - [X] Infinite scroll for restaurant results.
    - [X] Implement map view of restaurant results.
 - [X] Implement the restaurant detail page.
 
