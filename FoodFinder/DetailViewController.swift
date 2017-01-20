@@ -43,7 +43,13 @@ class DetailViewController: UIViewController {
   func loadLabels() {
     
     nameLabel.text = business.name
-    businessImage.setImageWith(business.imageURL!)
+    
+    if business.imageURL != nil {
+      businessImage.setImageWith(business.imageURL!)
+    } else {
+      businessImage.image = #imageLiteral(resourceName: "placeholder32")
+    }
+    
     backgroundImageView.setImageWith(business.imageURL!)
     ratingImage.setImageWith(business.ratingImageURL!)
     addressLabel.text = business.address
