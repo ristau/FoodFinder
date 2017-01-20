@@ -14,7 +14,7 @@ The following **required** functionality is completed:
 
 The following **optional** features are implemented:
 
-- [X] Search results page
+- [ ] Search results page
    - [ ] Infinite scroll for restaurant results.
    - [X] Implement map view of restaurant results.
 - [X] Implement the restaurant detail page.
