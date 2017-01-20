@@ -81,10 +81,10 @@
 		E522FAE11E2D3628009B68EA /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				E522FAE71E2D3C43009B68EA /* FoodBusinessViewController.swift */,
 				E522FAEF1E2DC405009B68EA /* DetailViewController.swift */,
 				E59DEFCB1E30053B00AB1D45 /* FilterViewController.swift */,
 				E522FAE31E2D39D1009B68EA /* BusinessCell.swift */,
-				E522FAE71E2D3C43009B68EA /* FoodBusinessViewController.swift */,
 				E522FAED1E2DA2FE009B68EA /* InfiniteScrollActivityView.swift */,
 				A78D2326D94EFBA0817E6878 /* Pods */,
 			);

@@ -37,7 +37,10 @@ class FilterViewController: UIViewController, UITableViewDataSource, UITableView
       tableView.delegate = self
       
       navigationItem.title = "Select Category"
-      
+    
+      view.backgroundColor = UIColor(red:1.00, green:0.99, blue:0.96, alpha:1.0) // #FFFCF6
+      tableView.backgroundColor = UIColor(red:1.00, green:0.99, blue:0.96, alpha:1.0) // #FFFCF6
+    
       for i in 0..<categories.count {
         
         if categories[i] == selectedCategoryName {
@@ -64,6 +67,9 @@ class FilterViewController: UIViewController, UITableViewDataSource, UITableView
     let categoryName = categories[indexPath.row]
     cell.textLabel!.text = categoryName
     print(categoryName)
+    
+    cell.backgroundColor = UIColor(red:1.00, green:0.99, blue:0.96, alpha:1.0) // #FFFCF6
+    cell.tintColor = UIColor.darkGray
     
     if categoryName == selectedCategoryName {
       cell.accessoryType = .checkmark

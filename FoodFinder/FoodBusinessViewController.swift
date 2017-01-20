@@ -41,10 +41,13 @@ class FoodBusinessViewController: UIViewController, UITableViewDataSource, UITab
         tableView.delegate = self
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 120
+        self.view.backgroundColor = UIColor(red:1.00, green:0.99, blue:0.96, alpha:1.0) // #FFFCF6
       
         // Set up nav Bar and initial view
         self.navigationController?.navigationBar.backgroundColor = UIColor.black.withAlphaComponent(1.0)
         self.navigationItem.rightBarButtonItem?.image = UIImage(named: "map_medgrey")
+        self.navigationController?.navigationBar.tintColor = UIColor.darkGray
+
         currentView = self.tableView
       
       
@@ -309,7 +312,9 @@ class FoodBusinessViewController: UIViewController, UITableViewDataSource, UITab
     if annotationView == nil {
       annotationView = MKPinAnnotationView(annotation: annotationView as! MKAnnotation?, reuseIdentifier: identifier)
       annotationView?.canShowCallout = true
+      annotationView?.tintColor = UIColor.darkGray
       annotationView?.rightCalloutAccessoryView = UIButton(type: .infoLight)
+    
     } else {
       annotationView?.annotation = annotation
     }

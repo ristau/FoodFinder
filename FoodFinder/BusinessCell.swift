@@ -33,6 +33,8 @@ class BusinessCell: UITableViewCell {
       ratingImageView.setImageWith(business.ratingImageURL!)
       distanceLabel.text = business.distance
       
+      backgroundColor = UIColor(red:1.00, green:0.99, blue:0.96, alpha:1.0) // #FFFCF6
+      
     }
   }
   

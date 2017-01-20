@@ -83,8 +83,8 @@ class DetailViewController: UIViewController {
     // Style the business profile image
     businessImage.layer.cornerRadius = self.businessImage.frame.size.width/2
     businessImage.clipsToBounds = true
-    businessImage.layer.borderWidth = 2.0
-    businessImage.layer.borderColor = UIColor.white.cgColor
+    businessImage.layer.borderWidth = 1.5
+    businessImage.layer.borderColor = UIColor.lightGray.cgColor
 
   }
   
