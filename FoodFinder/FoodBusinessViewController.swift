@@ -42,6 +42,7 @@ class FoodBusinessViewController: UIViewController, UITableViewDataSource, UITab
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 120
         self.view.backgroundColor = UIColor(red:1.00, green:0.99, blue:0.96, alpha:1.0) // #FFFCF6
+        self.tableView.backgroundColor = UIColor(red:1.00, green:0.99, blue:0.96, alpha:1.0) // #FFFCF6
       
         // Set up nav Bar and initial view
         self.navigationController?.navigationBar.backgroundColor = UIColor.black.withAlphaComponent(1.0)
@@ -125,8 +126,8 @@ class FoodBusinessViewController: UIViewController, UITableViewDataSource, UITab
       self.isMoreDataLoading = false // update the flag
       self.loadingMoreView!.stopAnimating() // stop the loading indicator
       self.tableView.reloadData() // reload tableview
-      self.mapView.reloadInputViews()
       
+      print("FETCHING MORE DATA")
       if let businesses = businesses {
         for business in businesses {
           print("Name: \(business.name!)")
