@@ -181,9 +181,11 @@ class FoodBusinessViewController: UIViewController, UITableViewDataSource, UITab
     })
     
     tableView.reloadData()
- 
-  }
   
+    // add function to load map with search results?
+  }
+
+
   func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
     self.searchBar.showsCancelButton = true
   }
@@ -374,27 +376,33 @@ class FoodBusinessViewController: UIViewController, UITableViewDataSource, UITab
       
       if segue.identifier == "TableView" {
         let detailvc = segue.destination as! DetailViewController
-
-
         let cell = sender as! UITableViewCell
         let indexPath = tableView.indexPath(for: cell)
-        business = businesses![(indexPath?.row)!]
-              detailvc.business = business
+        
+        if searchBar.text != "" {
+          business = filteredBusinesses![(indexPath?.row)!]
+        } else {
+          business = businesses![(indexPath?.row)!]
+        }
+        
+        detailvc.business = business
      
       } else if segue.identifier == "mapToDetail" {
         
-        // sender is currently of type MKAnnotationView
-        // how to I retrieve the business object that is being displayed by the MKAnnotationView?
-        
-        
         let detailvc = segue.destination as! DetailViewController
-        detailvc.business = business
- 
+        let annotationView = sender as! MKAnnotationView
+        let annotation = annotationView.annotation
+        
+        for business in businesses! {
+          
+          if business.coordinate?.latitude == annotation?.coordinate.latitude && business.coordinate?.longitude == annotation?.coordinate.longitude {
+            detailvc.business = business
+          }
+        }
       } else if segue.identifier == "Filter" {
         
         let filtervc = segue.destination as! FilterViewController
         filtervc.selectedCategoryName = searchTerm
-        
         
       }
       

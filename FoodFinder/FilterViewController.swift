@@ -15,7 +15,6 @@ class FilterViewController: UIViewController, UITableViewDataSource, UITableView
     var selectedCategoryName: String!
   
     var categories = [
-    "No Category",
     "American",
     "French",
     "Greek",
