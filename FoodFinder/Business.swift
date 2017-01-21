@@ -15,6 +15,7 @@ class Business: NSObject {
   var name: String?
   var address: String = ""
   var phone: String?
+  var phoneUrl: String?
 
   var imageURL: URL?
   var ratingImageURL: URL?
@@ -24,6 +25,7 @@ class Business: NSObject {
   var rating: NSNumber?
   var reviewCount: NSNumber?
   var openNow: Bool = true  // need to remove openNow, as this refers to whether the business is permanently closed 
+  // add openNow as search term parameter in order to retrieve 
   
   var coordinates: NSDictionary?
   var coordinate: CLLocationCoordinate2D?
@@ -45,6 +47,12 @@ class Business: NSObject {
     if phone == nil {
       phone = ""
     }
+    
+    phoneUrl = dictionary["phone"] as? String
+    if phoneUrl == nil {
+      phoneUrl = ""
+    }
+    
     
     
     let location = dictionary["location"] as? NSDictionary

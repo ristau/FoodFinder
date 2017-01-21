@@ -104,7 +104,8 @@ class FoodBusinessViewController: UIViewController, UITableViewDataSource, UITab
           for business in businesses {
             print("Name: \(business.name!)")
             print("Address: \(business.address)")
-            print("Phone: \(business.phone!)")
+            print("Display Phone: \(business.phone!)")
+            print("Phone URL: \(business.phoneUrl!)")
             print("Categories: \(business.categories!)")
           }
         }
@@ -273,12 +274,9 @@ class FoodBusinessViewController: UIViewController, UITableViewDataSource, UITab
         }
       }
     }
-    
-    
-    
-    print("Number of annotations are: \(annotations.count)")
-    print("Annotations are: \(annotations)")
 
+    print("Number of annotations are: \(annotations.count)")
+  
   }
   
   func reloadMap(){

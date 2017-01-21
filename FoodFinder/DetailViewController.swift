@@ -78,7 +78,6 @@ class DetailViewController: UIViewController {
       openNowLabel.textColor = UIColor.red
     }
     
-    
   }
   
 
@@ -121,6 +120,23 @@ class DetailViewController: UIViewController {
     annotation.title = business.name
     annotation.subtitle = business.address
     mapView.addAnnotation(annotation)
+  }
+  
+  @IBAction func callNumber(_ sender: Any) {
+    
+    let prefix = "telprompt://"
+    
+    if business.phoneUrl != nil {
+      let url:URL = URL(string: prefix + business.phoneUrl!)!
+      UIApplication.shared.open(url, options: [:], completionHandler: nil)
+         print("Calling number: \(url)")
+    } else {
+        let alert = UIAlertView()
+        alert.title = "Sorry!"
+        alert.message = "Phone number is not available for this business"
+        alert.addButton(withTitle: "Ok")
+        alert.show()
+    }
   }
   
   
