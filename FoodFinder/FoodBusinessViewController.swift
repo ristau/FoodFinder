@@ -19,10 +19,10 @@ class FoodBusinessViewController: UIViewController, UITableViewDataSource, UITab
   var business: Business?
   
   var searchTerm: String?
+  var searchActive: Bool = false
   var annotations: [MKPointAnnotation] = []
  
 
-  
   // ScrollView & Activity Indicator
   var isMoreDataLoading = false
   var loadingMoreView: InfiniteScrollActivityView?
@@ -82,8 +82,12 @@ class FoodBusinessViewController: UIViewController, UITableViewDataSource, UITab
 
   override func viewWillAppear(_ animated: Bool) {
     
-    fetchDataFromNetwork()
-    print("calling viewWillAppear")
+    if searchActive == true {
+      
+    } else {
+      fetchDataFromNetwork()
+    }
+  
   }
 
   
@@ -96,16 +100,14 @@ class FoodBusinessViewController: UIViewController, UITableViewDataSource, UITab
       self.businesses = businesses
       self.filteredBusinesses = businesses
     
-      if let businesses = businesses {
-        for business in businesses {
-          
-          print("Name: \(business.name!)")
-          print("Address: \(business.address)")
-          print("Phone: \(business.phone!)")
-          print("Categories: \(business.categories!)")
-          
+        if let businesses = businesses {
+          for business in businesses {
+            print("Name: \(business.name!)")
+            print("Address: \(business.address)")
+            print("Phone: \(business.phone!)")
+            print("Categories: \(business.categories!)")
+          }
         }
-      }
       
       self.tableView.reloadData()
       self.setDataForMap()
@@ -185,8 +187,8 @@ class FoodBusinessViewController: UIViewController, UITableViewDataSource, UITab
     })
     
     tableView.reloadData()
-  
-    // add function to load map with search results?
+    searchActive = true
+
   }
 
 
@@ -196,6 +198,7 @@ class FoodBusinessViewController: UIViewController, UITableViewDataSource, UITab
   
   func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
     searchBar.showsCancelButton = false
+    searchActive = false
     searchBar.text = ""
     searchBar.resignFirstResponder()
     fetchDataFromNetwork()
@@ -256,11 +259,22 @@ class FoodBusinessViewController: UIViewController, UITableViewDataSource, UITab
     
     removeAnnotations()
     
-    if let businesses = businesses {
-      for business in businesses {
-        self.addAnnotationAtCoordinate(coordinate: business.coordinate!, name: business.name!, address: business.address)
+    if searchBar.text != "" {
+      if let businesses = filteredBusinesses {
+        for business in businesses {
+          self.addAnnotationAtCoordinate(coordinate: business.coordinate!, name: business.name!, address: business.address)
+        }
+      }
+    } else {
+      
+      if let businesses = businesses {
+        for business in businesses {
+          self.addAnnotationAtCoordinate(coordinate: business.coordinate!, name: business.name!, address: business.address)
+        }
       }
     }
+    
+    
     
     print("Number of annotations are: \(annotations.count)")
     print("Annotations are: \(annotations)")
@@ -399,12 +413,27 @@ class FoodBusinessViewController: UIViewController, UITableViewDataSource, UITab
         let annotationView = sender as! MKAnnotationView
         let annotation = annotationView.annotation
         
-        for business in businesses! {
+        
+        if searchBar.text != "" {
+         
+          for business in filteredBusinesses! {
+            
+            if business.coordinate?.latitude == annotation?.coordinate.latitude && business.coordinate?.longitude == annotation?.coordinate.longitude {
+              detailvc.business = business
+            }
+          }
+
+        } else {
           
-          if business.coordinate?.latitude == annotation?.coordinate.latitude && business.coordinate?.longitude == annotation?.coordinate.longitude {
-            detailvc.business = business
+          for business in businesses! {
+            
+            if business.coordinate?.latitude == annotation?.coordinate.latitude && business.coordinate?.longitude == annotation?.coordinate.longitude {
+              detailvc.business = business
+            }
           }
         }
+  
+        
       } else if segue.identifier == "Filter" {
         
         let filtervc = segue.destination as! FilterViewController

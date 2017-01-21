@@ -17,15 +17,13 @@ class FilterViewController: UIViewController, UITableViewDataSource, UITableView
     var categories = [
     "American",
     "French",
-    "Greek",
-    "German",
     "Indian",
     "Italian",
     "Mexican",
     "Peruvian",
     "Pizza",
     "Portugese",
-    "Thai",
+    "Thai"
     ]
 
     var selectedIndexPath = IndexPath()
