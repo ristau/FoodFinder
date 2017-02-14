@@ -39,9 +39,11 @@ Here's a walkthrough of implemented user stories:
 
 GIF created with LiceCap(http://www.cockos.com/licecap/).
 
+Icons obtained from iconMnstr.com
+
 ## Notes
 
-Describe any challenges encountered while building the app.
+Challenges encountered: getting the filtered data to correctly display across views; properly identifying the restaurants in mapview (required an additional array that then had to be cleared out with each viewing) 
 
 ## License
 
