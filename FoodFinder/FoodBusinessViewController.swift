@@ -17,6 +17,7 @@ class FoodBusinessViewController: UIViewController, UITableViewDataSource, UITab
   var businesses: [Business]?
   var filteredBusinesses: [Business]?
   var business: Business?
+  var offset: Int = 0
   
   var searchTerm: String?
   var searchActive: Bool = false
@@ -43,6 +44,7 @@ class FoodBusinessViewController: UIViewController, UITableViewDataSource, UITab
         tableView.estimatedRowHeight = 120
         self.view.backgroundColor = UIColor(red:1.00, green:0.99, blue:0.96, alpha:1.0) // #FFFCF6
         self.tableView.backgroundColor = UIColor(red:1.00, green:0.99, blue:0.96, alpha:1.0) // #FFFCF6
+        
       
         // Set up nav Bar and initial view
         self.navigationController?.navigationBar.backgroundColor = UIColor.black.withAlphaComponent(1.0)
@@ -95,7 +97,7 @@ class FoodBusinessViewController: UIViewController, UITableViewDataSource, UITab
   
   func fetchDataFromNetwork() {
     
-    Business.searchWithTerm(term: searchTerm!, completion: { (businesses: [Business]?, error: Error?) -> Void in
+    Business.searchWithTerm(term: searchTerm!, offset: 0, completion: { (businesses: [Business]?, error: Error?) -> Void in
       
       self.businesses = businesses
       self.filteredBusinesses = businesses
@@ -103,10 +105,6 @@ class FoodBusinessViewController: UIViewController, UITableViewDataSource, UITab
         if let businesses = businesses {
           for business in businesses {
             print("Name: \(business.name!)")
-            print("Address: \(business.address)")
-            print("Display Phone: \(business.phone!)")
-            print("Phone URL: \(business.phoneUrl!)")
-            print("Categories: \(business.categories!)")
           }
         }
       
@@ -121,27 +119,27 @@ class FoodBusinessViewController: UIViewController, UITableViewDataSource, UITab
   
   func fetchMoreData() {
     
-    Business.searchWithTerm(term: searchTerm!, completion: { (businesses: [Business]?, error: Error?) -> Void in
+    self.offset = self.offset + 20
+    
+    Business.searchWithTerm(term: searchTerm!, offset: offset, completion: { (businesses: [Business]?, error: Error?) -> Void in
       
-      self.businesses = businesses
-      self.filteredBusinesses = businesses
+        self.businesses?.append(contentsOf: businesses!)
+        self.filteredBusinesses = self.businesses
+        self.isMoreDataLoading = false
+        self.tableView.reloadData()
       
-      self.isMoreDataLoading = false // update the flag
-      self.loadingMoreView!.stopAnimating() // stop the loading indicator
-      self.tableView.reloadData() // reload tableview
       
-      print("FETCHING MORE DATA")
+      print("FETCHING MORE DATA WITH OFFSET")
       if let businesses = businesses {
         for business in businesses {
           print("Name: \(business.name!)")
-          print("Address: \(business.address)")
-          print("Categories: \(business.categories!)")
         }
       }
     }
     )
     
   }
+  
   
  
     // MARK: - TableView Methods

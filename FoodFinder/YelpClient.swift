@@ -50,23 +50,24 @@ class YelpClient: BDBOAuth1RequestOperationManager {
   
   }
   
-  func searchWithTerm(_ term: String, completion: @escaping ([Business]?, Error?) -> Void) -> AFHTTPRequestOperation {
+  func searchWithTerm(_ term: String, offset: Int, completion: @escaping ([Business]?, Error?) -> Void) -> AFHTTPRequestOperation {
 
-    return searchWithTerm(term, sort: nil, categories: nil, deals: nil, completion: completion)
+    return searchWithTerm(term, offset: offset, sort: nil, categories: nil, deals: nil, completion: completion)
 
   }
   
-  func searchWithTerm(_ term: String, sort: YelpSortMode?, categories: [String]?, deals: Bool?, completion: @escaping ([Business]?, Error?) -> Void) -> AFHTTPRequestOperation {
+  func searchWithTerm(_ term: String, offset: Int, sort: YelpSortMode?, categories: [String]?, deals: Bool?, completion: @escaping ([Business]?, Error?) -> Void) -> AFHTTPRequestOperation {
     
-    let limit: Int = 15
-    let page: Int = 5
-    let offset: Int = limit * page
+   //let limit: Int = 5
+  //  let page: Int = 10
+  //  let offset: Int = limit * page
     let locString = String(YelpClient.latitude) + ", " + String(YelpClient.longitude)
    
     // For additional parameters, see http://www.yelp.com/developers/documentation/v2/search_api
     
-    var parameters: [String : AnyObject] = ["term": term as AnyObject, "ll": locString as AnyObject, "limit" : limit as AnyObject, "offset": offset as AnyObject]
+    var parameters: [String : AnyObject] = ["term": term as AnyObject, "ll": locString as AnyObject, "offset": offset as AnyObject]
     
+    //"limit" : limit as AnyObject
     
     if sort != nil {
       parameters["sort"] = sort!.rawValue as AnyObject?
